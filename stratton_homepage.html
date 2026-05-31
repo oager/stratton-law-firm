@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law Office of Douglas D. Stratton, P.A. | Miami Beach Attorney</title>
+<meta name="description" content="Miami Beach attorney Douglas D. Stratton provides direct legal counsel for business law, criminal defense, entertainment law, and civil litigation matters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --cream: #faf4ea;
+    --cream-2: #fff9f0;
+    --sand: #efe2d0;
+    --ink: #17110d;
+    --ink-2: #2b211c;
+    --muted: #6f625a;
+    --line: rgba(23, 17, 13, 0.14);
+    --burgundy: #4a1818;
+    --burgundy-dark: #2d0f10;
+    --copper: #8a5140;
+    --gold: #c28a45;
+    --white: #ffffff;
+    --shadow-soft: 0 24px 70px rgba(23, 17, 13, 0.15);
+    --shadow-card: 0 14px 34px rgba(23, 17, 13, 0.11);
+    --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-body: "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --max: 1190px;
+    --radius: 28px;
+    --radius-sm: 18px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.62;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(194, 138, 69, 0.16), transparent 27%),
+      radial-gradient(circle at 86% 70%, rgba(74, 24, 24, 0.10), transparent 30%);
+    z-index: -3;
+  }
+
+  a { color: inherit; }
+
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    background: var(--cream-2);
+    animation: loader-fade 900ms ease 1.55s forwards;
+  }
+
+  .loader-mark {
+    width: min(360px, 82vw);
+    min-height: 150px;
+    border: 1px solid rgba(74, 24, 24, 0.18);
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 249, 240, 0.78);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(8px) scale(0.96);
+    opacity: 0;
+    animation: logo-rise 1.2s ease forwards;
+  }
+
+  .loader-name {
+    font-family: var(--font-display);
+    font-size: clamp(27px, 6vw, 44px);
+    line-height: 0.98;
+    text-align: center;
+    color: var(--burgundy-dark);
+    letter-spacing: -0.035em;
+    font-weight: 800;
+  }
+
+  .loader-name span {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    margin-top: 13px;
+    color: var(--copper);
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  @keyframes logo-rise { to { transform: translateY(0) scale(1); opacity: 1; } }
+  @keyframes loader-fade { to { opacity: 0; visibility: hidden; } }
+
+  .topbar {
+    background: var(--ink);
+    color: rgba(255, 249, 240, 0.74);
+    font-size: 13px;
+    position: relative;
+    z-index: 100;
+  }
+
+  .topbar-inner, .nav-inner, .container {
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+
+  .topbar-inner {
+    min-height: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 0 28px;
+  }
+
+  .topbar a { text-decoration: none; transition: color 180ms ease; }
+  .topbar a:hover { color: var(--white); }
+  .topbar-left, .topbar-right { display: flex; gap: 19px; align-items: center; flex-wrap: wrap; }
+  .topbar-dot { width: 5px; height: 5px; border-radius: 99px; background: var(--copper); display: inline-block; margin-right: 8px; vertical-align: middle; }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: rgba(250, 244, 234, 0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-inner {
+    height: 86px;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .brand {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 228px;
+  }
+
+  .brand-seal {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--burgundy);
+    color: var(--cream-2);
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    box-shadow: 0 10px 24px rgba(74, 24, 24, 0.22);
+  }
+
+  .brand-text strong {
+    display: block;
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+  }
+
+  .brand-text span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 26px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    position: relative;
+    text-decoration: none;
+    color: var(--ink-2);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 2px;
+    background: var(--copper);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms ease;
+  }
+
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta, .btn-primary, .btn-outline, .btn-cream, .btn-white {
+    border-radius: 999px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+    white-space: nowrap;
+  }
+
+  .nav-cta {
+    padding: 13px 22px;
+    background: var(--burgundy);
+    color: var(--cream-2);
+    font-size: 13px;
+    box-shadow: 0 12px 24px rgba(74, 24, 24, 0.18);
+  }
+
+  .nav-cta:hover, .btn-primary:hover { background: var(--burgundy-dark); transform: translateY(-2px); box-shadow: 0 16px 36px rgba(74, 24, 24, 0.24); }
+
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 128px);
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 76px 28px 44px;
+    background: var(--cream-2);
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(250, 244, 234, 0.96) 0%, rgba(250, 244, 234, 0.89) 38%, rgba(250, 244, 234, 0.50) 68%, rgba(250, 244, 234, 0.18) 100%),
+      linear-gradient(180deg, rgba(250, 244, 234, 0.25) 0%, rgba(250, 244, 234, 0.93) 100%),
+      url("assets/miami-beach-hero.jpg") center right / cover no-repeat;
+    z-index: -2;
+    transform: scale(1.03);
+  }
+
+  .hero::after {
+    content: "STRATTON LAW";
+    position: absolute;
+    right: -42px;
+    bottom: 28px;
+    font-family: var(--font-body);
+    font-size: clamp(54px, 12vw, 165px);
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    line-height: 0.8;
+    color: rgba(74, 24, 24, 0.055);
+    z-index: -1;
+    white-space: nowrap;
+  }
+
+  .hero-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.03fr) minmax(350px, 0.72fr);
+    gap: 52px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid rgba(74, 24, 24, 0.22);
+    background: rgba(255, 249, 240, 0.70);
+    color: var(--burgundy);
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 24px rgba(38, 24, 16, 0.06);
+  }
+
+  .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--copper); box-shadow: 0 0 0 5px rgba(194,138,69,0.15); }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    margin-top: 26px;
+    max-width: 860px;
+    font-size: clamp(48px, 6.4vw, 88px);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    text-transform: none;
+  }
+
+  .hero h1 em {
+    color: var(--burgundy);
+    font-style: normal;
+    position: relative;
+  }
+
+  .hero h1 em::after {
+    content: "";
+    position: absolute;
+    left: 0.03em;
+    right: 0.03em;
+    bottom: 0.04em;
+    height: 0.13em;
+    background: rgba(194,138,69,0.16);
+    border-radius: 999px;
+    z-index: -1;
+  }
+
+  .rotator {
+    min-height: 34px;
+    margin-top: 21px;
+    position: relative;
+    color: var(--burgundy);
+    font-size: clamp(17px, 2vw, 23px);
+    font-weight: 800;
+  }
+
+  .rotator span {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: rotate-lines 12s infinite;
+  }
+
+  .rotator span:nth-child(2) { animation-delay: 3s; }
+  .rotator span:nth-child(3) { animation-delay: 6s; }
+  .rotator span:nth-child(4) { animation-delay: 9s; }
+
+  @keyframes rotate-lines {
+    0%, 8% { opacity: 0; transform: translateY(12px); }
+    12%, 24% { opacity: 1; transform: translateY(0); }
+    30%, 100% { opacity: 0; transform: translateY(-12px); }
+  }
+
+  .hero-sub {
+    max-width: 590px;
+    margin-top: 26px;
+    font-size: 18px;
+    color: var(--ink-2);
+  }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 38px; }
+  .btn-primary { padding: 16px 28px; background: var(--burgundy); color: var(--cream-2); box-shadow: 0 14px 32px rgba(74, 24, 24, 0.18); }
+  .btn-outline { padding: 16px 28px; background: rgba(255,249,240,0.50); color: var(--burgundy-dark); border: 1px solid rgba(74,24,24,0.25); backdrop-filter: blur(10px); }
+  .btn-outline:hover { transform: translateY(-2px); border-color: rgba(74,24,24,0.45); background: rgba(255,249,240,0.84); box-shadow: var(--shadow-card); }
+
+  .hero-detail-grid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 760px;
+  }
+
+  .mini-tile {
+    background: rgba(255, 249, 240, 0.74);
+    border: 1px solid rgba(74, 24, 24, 0.16);
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 10px 26px rgba(38, 24, 16, 0.07);
+    backdrop-filter: blur(12px);
+  }
+
+  .mini-tile strong { display: block; font-family: var(--font-display); font-size: 21px; line-height: 1.08; color: var(--ink); }
+  .mini-tile span { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .hero-card-wrap { position: relative; min-height: 530px; }
+
+  .review-card, .support-card, .feature-card {
+    position: absolute;
+    border: 1px solid rgba(74, 24, 24, 0.16);
+    background: rgba(255, 249, 240, 0.82);
+    backdrop-filter: blur(18px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .review-card {
+    top: 28px;
+    right: 0;
+    width: min(390px, 100%);
+    padding: 30px;
+  }
+
+  .support-card {
+    left: -22px;
+    bottom: 92px;
+    width: 260px;
+    padding: 24px;
+  }
+
+  .feature-card {
+    right: 20px;
+    bottom: 0;
+    width: 286px;
+    padding: 24px;
+    background: rgba(74, 24, 24, 0.96);
+    color: var(--cream-2);
+    border-color: rgba(255,255,255,0.16);
+  }
+
+  .card-kicker { color: var(--copper); font-size: 12px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+  .review-card blockquote { font-family: var(--font-display); font-size: 23px; line-height: 1.25; color: var(--ink); }
+  .stars { margin-top: 18px; color: var(--gold); letter-spacing: 2px; font-size: 15px; }
+  .review-name { margin-top: 8px; color: var(--muted); font-weight: 700; font-size: 13px; }
+  .support-card strong { display: block; color: var(--ink); font-family: var(--font-display); font-size: 28px; line-height: 1; }
+  .support-card span { display: block; margin-top: 12px; color: var(--muted); font-size: 13px; font-weight: 700; }
+  .feature-card p { margin-top: 10px; color: rgba(255,249,240,0.76); font-size: 14px; }
+  .feature-card a { margin-top: 18px; color: var(--cream-2); display: inline-flex; font-weight: 900; text-decoration: none; }
+
+  .quick-links {
+    position: relative;
+    margin: -42px auto 0;
+    max-width: var(--max);
+    padding: 0 28px;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .quick-link {
+    min-height: 150px;
+    text-decoration: none;
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+
+  .quick-link:hover { transform: translateY(-5px); border-color: rgba(74, 24, 24, 0.32); box-shadow: var(--shadow-soft); }
+  .quick-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: rgba(194,138,69,0.14); color: var(--burgundy); margin-bottom: 18px; font-size: 20px; }
+  .quick-link h3 { font-family: var(--font-display); color: var(--ink); font-size: 25px; line-height: 1.1; }
+  .quick-link span { display: inline-block; margin-top: 13px; font-weight: 900; color: var(--burgundy); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  section { padding: 106px 28px; }
+  .container { width: 100%; }
+  .section-eyebrow { color: var(--burgundy); font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 13px; }
+  .section-title { font-family: var(--font-display);
+    font-size: clamp(34px, 4.2vw, 62px);
+    line-height: 0.98;
+    letter-spacing: -0.04em; color: var(--ink); }
+  .section-sub { max-width: 650px; color: var(--muted); font-size: 18px; margin-top: 22px; }
+
+  .intro-grid { display: grid; grid-template-columns: 0.86fr 1.14fr; gap: 72px; align-items: start; }
+  .intro-copy p { color: var(--ink-2); font-size: 17px; margin-bottom: 22px; }
+  .signature-line { margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+  .signature-name { font-family: var(--font-display); font-size: 27px; color: var(--burgundy); line-height: 1; letter-spacing: -0.025em; }
+  .signature-meta { color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
+
+  .practice-section { background: var(--ink); color: var(--cream-2); position: relative; overflow: hidden; }
+  .practice-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 18% 20%, rgba(194,138,69,0.18), transparent 33%), radial-gradient(circle at 85% 80%, rgba(194,138,69,0.10), transparent 35%); pointer-events: none; }
+  .practice-section .container { position: relative; }
+  .practice-section .section-title { color: var(--cream-2); }
+  .practice-section .section-sub { color: rgba(255,249,240,0.64); }
+  .practice-header { display: flex; justify-content: space-between; gap: 32px; align-items: end; margin-bottom: 56px; }
+  .practice-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .practice-card { position: relative; min-height: 300px; text-decoration: none; color: var(--cream-2); background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.10); border-radius: var(--radius); padding: 28px; overflow: hidden; transition: transform 220ms ease, border-color 220ms ease, background 220ms ease; }
+  .practice-card::after { content: ""; position: absolute; width: 130px; height: 130px; right: -48px; bottom: -48px; border-radius: 50%; background: rgba(194,138,69,0.16); transition: transform 220ms ease; }
+  .practice-card:hover { transform: translateY(-7px); border-color: rgba(194,138,69,0.48); background: rgba(255,255,255,0.078); }
+  .practice-card:hover::after { transform: scale(1.2); }
+  .practice-icon { width: 50px; height: 50px; border-radius: 18px; display: grid; place-items: center; background: rgba(194,138,69,0.18); color: var(--gold); font-size: 23px; margin-bottom: 32px; }
+  .practice-card h3 { font-family: var(--font-display); font-size: 27px; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 16px; }
+  .practice-card p { color: rgba(255,249,240,0.62); font-size: 14px; }
+  .card-link { position: absolute; left: 28px; bottom: 26px; color: var(--gold); font-weight: 900; font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase; }
+
+  .testimonials-section { background: var(--sand); }
+  .testimonials-grid { margin-top: 50px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .testimonial-card { background: rgba(255, 249, 240, 0.82); border: 1px solid rgba(74,24,24,0.14); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-card); }
+  .testimonial-card p { color: var(--ink-2); font-family: var(--font-body); font-size: 18px; line-height: 1.52; font-weight: 700; margin: 17px 0 22px; }
+  .testimonial-author { font-weight: 900; color: var(--ink); }
+  .testimonial-meta { color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+  .why-list { list-style: none; display: grid; gap: 18px; margin-top: 34px; }
+  .why-list li { display: flex; gap: 15px; padding: 20px; border: 1px solid var(--line); background: rgba(255,249,240,0.64); border-radius: 22px; }
+  .why-check { width: 28px; height: 28px; flex: 0 0 28px; border-radius: 50%; display: grid; place-items: center; background: var(--burgundy); color: var(--cream-2); font-size: 13px; font-weight: 900; }
+  .why-list strong { display: block; color: var(--ink); }
+  .why-list span { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .portrait-card { min-height: 620px; border-radius: 38px; background: linear-gradient(145deg, rgba(74,24,24,0.96), rgba(23,17,13,0.96)), url("assets/miami-beach-hero.jpg") center / cover; color: var(--cream-2); padding: 42px; display: flex; flex-direction: column; justify-content: flex-end; box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
+  .portrait-card::before { content: "DDS"; position: absolute; top: 34px; right: 34px; font-family: var(--font-display); font-size: 100px; color: rgba(255,249,240,0.08); line-height: 1; }
+  .portrait-card h3 { font-family: var(--font-display); font-size: 48px; line-height: 0.98; letter-spacing: -0.04em; }
+  .portrait-card p { margin-top: 16px; color: rgba(255,249,240,0.74); max-width: 440px; }
+  .credentials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .credentials span { border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.08); border-radius: 999px; padding: 8px 13px; font-size: 12px; font-weight: 900; }
+
+  .contact-section { background: var(--burgundy); color: var(--cream-2); text-align: center; position: relative; overflow: hidden; }
+  .contact-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% -10%, rgba(255,255,255,0.16), transparent 38%); pointer-events: none; }
+  .contact-section .container { position: relative; }
+  .contact-section .section-title { color: var(--cream-2); }
+  .contact-section .section-sub { margin-left: auto; margin-right: auto; color: rgba(255,249,240,0.76); }
+  .contact-details { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 44px 0 38px; text-align: left; }
+  .contact-detail { padding: 24px; border: 1px solid rgba(255,255,255,0.17); border-radius: 22px; background: rgba(255,255,255,0.07); }
+  .contact-detail .label { font-size: 11px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,249,240,0.60); margin-bottom: 9px; }
+  .contact-detail .value { font-weight: 800; color: var(--cream-2); }
+  .btn-white { padding: 17px 34px; background: var(--cream-2); color: var(--burgundy); }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,0.19); }
+
+  .legal-strip { background: #100b09; color: rgba(255,249,240,0.54); padding: 28px; font-size: 12px; }
+  .legal-strip .container { display: grid; gap: 10px; }
+  .legal-links { display: flex; gap: 18px; flex-wrap: wrap; font-weight: 800; color: rgba(255,249,240,0.72); }
+  .legal-links a { text-decoration: none; }
+
+  footer { background: var(--ink); color: rgba(255,249,240,0.58); padding: 44px 28px; }
+  .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; gap: 26px; align-items: center; flex-wrap: wrap; }
+  .footer-logo { font-family: var(--font-display); font-size: 22px; color: var(--cream-2); letter-spacing: -0.025em; }
+  .footer-logo span { color: var(--copper); }
+  .footer-info { text-align: center; font-size: 13px; }
+  .footer-bar { font-size: 12px; }
+
+  @media (max-width: 1040px) {
+    .hero-inner, .intro-grid, .why-grid { grid-template-columns: 1fr; }
+    .hero-card-wrap { min-height: 440px; }
+    .support-card { left: 0; }
+    .practice-grid, .contact-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nav-links { display: none; }
+    .quick-links { grid-template-columns: 1fr; margin-top: 0; padding-top: 22px; }
+    .hero-detail-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    .topbar-inner { justify-content: center; text-align: center; }
+    .topbar-right { display: none; }
+    .nav-inner { height: 76px; padding: 0 18px; }
+    .brand { min-width: auto; }
+    .brand-text span { display: none; }
+    .nav-cta { padding: 11px 15px; }
+    .hero { padding: 58px 18px 36px; min-height: auto; }
+    .hero::before { background: linear-gradient(180deg, rgba(250,244,234,0.94), rgba(250,244,234,0.82)), url("assets/miami-beach-hero.jpg") center / cover no-repeat; }
+    .hero-card-wrap { display: none; }
+    .hero-actions a { width: 100%; }
+    section { padding: 76px 18px; }
+    .practice-header { display: block; }
+    .practice-grid, .testimonials-grid, .contact-details { grid-template-columns: 1fr; }
+    .portrait-card { min-height: 460px; padding: 28px; }
+    .footer-inner { display: block; text-align: center; }
+    .footer-info, .footer-bar { margin-top: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="loader" aria-hidden="true">
+  <div class="loader-mark">
+    <div class="loader-name">Stratton Law<span>Miami Beach Counsel</span></div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left"><span><span class="topbar-dot"></span>Miami Beach, Florida</span><a href="tel:3056727772">(305) 672-7772</a></div>
+    <div class="topbar-right"><a href="tel:3053899246">Direct Cell: (305) 389-9246</a><a href="#contact">407 Lincoln Rd, Suite 2A</a></div>
+  </div>
+</div>
+
+<header>
+  <nav class="nav-inner" aria-label="Primary navigation">
+    <a class="brand" href="#top" aria-label="Law Office of Douglas D. Stratton homepage">
+      <div class="brand-seal">DS</div>
+      <div class="brand-text"><strong>Stratton Law</strong><span>Douglas D. Stratton, P.A.</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#practice">Practice Areas</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#results">Client Notes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:3056727772" class="nav-cta">Schedule Now</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Hero section">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">Florida Bar #240966 · Miami Beach</div>
+        <h1>Legal counsel with <em>direct attorney attention.</em></h1>
+        <div class="rotator" aria-label="Firm values">
+          <span>Business disputes handled with practical strategy.</span>
+          <span>Criminal defense when the stakes are personal.</span>
+          <span>Entertainment contracts built for real-world leverage.</span>
+          <span>Civil litigation with clear communication from day one.</span>
+        </div>
+        <p class="hero-sub">Work directly with Douglas D. Stratton, not layers of staff. The firm provides focused South Florida representation for businesses, professionals, creators, and individuals who need decisive legal guidance.</p>
+        <div class="hero-actions">
+          <a href="tel:3056727772" class="btn-primary">Book a Consultation</a>
+          <a href="#practice" class="btn-outline">Explore Practice Areas</a>
+        </div>
+        <div class="hero-detail-grid" aria-label="Firm highlights">
+          <div class="mini-tile"><strong>20+ Years</strong><span>Florida Bar Experience</span></div>
+          <div class="mini-tile"><strong>1:1 Counsel</strong><span>Direct Attorney Access</span></div>
+          <div class="mini-tile"><strong>Miami Beach</strong><span>Lincoln Road Office</span></div>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap" aria-hidden="true">
+        <div class="review-card">
+          <div class="card-kicker">Client-Focused Representation</div>
+          <blockquote>“No runaround. No hand-offs. Just a lawyer who knew the case and answered directly.”</blockquote>
+          <div class="stars">★★★★★</div>
+          <div class="review-name">Commercial Litigation Client · Miami Beach</div>
+        </div>
+        <div class="support-card">
+          <strong>24/7</strong>
+          <span>Urgent case intake and direct callback options for high-stakes matters.</span>
+        </div>
+        <div class="feature-card">
+          <div class="card-kicker">Boutique Practice</div>
+          <h3>Personal strategy. Serious advocacy.</h3>
+          <p>Built for clients who want clarity, access, and experienced counsel from the first conversation.</p>
+          <a href="#contact">Talk to us now →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="quick-links" aria-label="Quick links">
+    <a class="quick-link" href="#practice"><div class="quick-icon">⚖</div><h3>Practice Areas</h3><span>See services →</span></a>
+    <a class="quick-link" href="#about"><div class="quick-icon">◆</div><h3>Meet the Attorney</h3><span>About Douglas →</span></a>
+    <a class="quick-link" href="#contact"><div class="quick-icon">☎</div><h3>Start Your Case</h3><span>Contact now →</span></a>
+  </div>
+
+  <section class="intro-section">
+    <div class="container intro-grid">
+      <div>
+        <div class="section-eyebrow">Miami Beach Attorney</div>
+        <h2 class="section-title">Clear advice for complicated legal moments.</h2>
+        <p class="section-sub">Whether your issue involves business risk, criminal exposure, a creative contract, or civil litigation, the priority is the same: understand the facts, protect your position, and move forward with a strategy you can actually follow.</p>
+      </div>
+      <div class="intro-copy">
+        <p>The Law Office of Douglas D. Stratton, P.A. is a boutique Miami Beach practice designed around direct attorney access. Clients work with Douglas personally from the first call through resolution, so the person advising you is the same person who understands the facts, pressure points, and goals of your case.</p>
+        <p>This approach creates a modern, responsive client experience while preserving the judgment and courtroom experience that serious matters require. You receive practical communication, candid analysis, and representation tailored to the real consequences of the decision in front of you.</p>
+        <div class="signature-line">
+          <div><div class="signature-name">Douglas D. Stratton</div><div class="signature-meta">Founder · Florida Bar #240966</div></div>
+          <a href="#contact" class="btn-outline">Request Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practice-section" id="practice">
+    <div class="container">
+      <div class="practice-header">
+        <div>
+          <div class="section-eyebrow">Featured Practice Areas</div>
+          <h2 class="section-title">Focused areas. Full attention.</h2>
+        </div>
+        <p class="section-sub">Every matter receives Douglas Stratton’s direct review, practical planning, and clear communication.</p>
+      </div>
+      <div class="practice-grid">
+        <a href="#contact" class="practice-card"><div class="practice-icon">▦</div><h3>Business &amp; Commercial Law</h3><p>Contracts, commercial disputes, partnership issues, business formation, and litigation strategy.</p><div class="card-link">Learn More</div></a>
+        <a href="#contact" class="practice-card"><div class="practice-icon">◇</div><h3>Criminal Defense</h3><p>Defense for misdemeanors, felonies, white-collar matters, and urgent criminal investigations.</p><div class="card-link">Learn More</div></a>
+        <a href="#contact" class="practice-card"><div class="practice-icon">✦</div><h3>Entertainment Law</h3><p>Creative contracts, licensing, intellectual property concerns, talent agreements, and royalty disputes.</p><div class="card-link">Learn More</div></a>
+        <a href="#contact" class="practice-card"><div class="practice-icon">§</div><h3>Civil Litigation</h3><p>Property disputes, breach of contract, condo and HOA matters, business torts, and court advocacy.</p><div class="card-link">Learn More</div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section" id="results">
+    <div class="container">
+      <div class="section-eyebrow">Client Notes</div>
+      <h2 class="section-title">Trusted through high-pressure moments.</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p>“Douglas handled my business dispute from start to finish personally. No hand-offs. No surprises.”</p><div class="testimonial-author">Michael R.</div><div class="testimonial-meta">Business &amp; Commercial Law</div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p>“Facing criminal charges was the most stressful moment of my life. Douglas was calm, strategic, and always available.”</p><div class="testimonial-author">Anonymous Client</div><div class="testimonial-meta">Criminal Defense</div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p>“My entertainment contract was a mess. Douglas negotiated terms that protected my work and my future.”</p><div class="testimonial-author">Sofia L.</div><div class="testimonial-meta">Entertainment Law</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section" id="about">
+    <div class="container why-grid">
+      <div>
+        <div class="section-eyebrow">The Stratton Difference</div>
+        <h2 class="section-title">Boutique practice. Practical strategy.</h2>
+        <p class="section-sub">Large firms can feel distant. Stratton Law is built for people who want experienced counsel, direct access, and straightforward answers.</p>
+        <ul class="why-list">
+          <li><div class="why-check">✓</div><div><strong>Direct attorney access</strong><span>You work with Douglas Stratton personally, not a rotating team of junior staff.</span></div></li>
+          <li><div class="why-check">✓</div><div><strong>South Florida court experience</strong><span>Practical familiarity with Miami-Dade and Broward procedures, pressures, and expectations.</span></div></li>
+          <li><div class="why-check">✓</div><div><strong>Business-minded advice</strong><span>Legal recommendations are weighed against cost, time, leverage, and real-world consequences.</span></div></li>
+          <li><div class="why-check">✓</div><div><strong>Clear fee conversations</strong><span>Transparent expectations are discussed before the representation moves forward.</span></div></li>
+        </ul>
+      </div>
+      <div class="portrait-card">
+        <h3>Douglas D. Stratton</h3>
+        <p>Founder of the Law Office of Douglas D. Stratton, P.A., serving Miami Beach and South Florida clients across business, criminal, entertainment, and civil litigation matters.</p>
+        <div class="credentials"><span>Florida Bar Member</span><span>20+ Years</span><span>Miami Beach</span><span>Bar #240966</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-eyebrow">Talk To Us Now</div>
+      <h2 class="section-title">Ready to discuss your case?</h2>
+      <p class="section-sub">No hold music. No unnecessary layers. Start with a direct conversation about the issue, the options, and the next best step.</p>
+      <div class="contact-details">
+        <div class="contact-detail"><div class="label">Office</div><div class="value">407 Lincoln Rd, Suite 2A<br>Miami Beach, FL 33139</div></div>
+        <div class="contact-detail"><div class="label">Main Phone</div><div class="value">(305) 672-7772</div></div>
+        <div class="contact-detail"><div class="label">Direct Cell</div><div class="value">(305) 389-9246</div></div>
+        <div class="contact-detail"><div class="label">Toll-Free</div><div class="value">(877) 553-3328</div></div>
+      </div>
+      <a href="tel:3056727772" class="btn-white">Schedule Your Consultation</a>
+    </div>
+  </section>
+
+  <div class="legal-strip">
+    <div class="container">
+      <div class="legal-links"><a href="#contact">Disclaimer</a><a href="#contact">Privacy Policy</a><a href="#contact">Terms of Use</a><a href="#contact">Cookie Policy</a></div>
+      <p>This website is attorney advertising and is provided for general informational purposes only. Viewing this site or contacting the firm does not create an attorney-client relationship. Please do not send confidential information until an attorney-client relationship has been confirmed in writing.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Law Office of Douglas D. <span>Stratton</span>, P.A.</div>
+    <div class="footer-info">407 Lincoln Rd, Suite 2A · Miami Beach, FL 33139 · (305) 672-7772<br>Florida Bar Member #240966 · Licensed in Florida</div>
+    <div class="footer-bar">© 2026 Law Office of Douglas D. Stratton, P.A.</div>
+  </div>
+</footer>
+</body>
+</html>

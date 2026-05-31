@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratton Law Updated Color Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oxblood: #4A1818;
+    --espresso: #17110D;
+    --ivory: #FAF4EA;
+    --ivory-light: #FFF9F0;
+    --brass: #C28A45;
+    --clay: #8A5140;
+    --sand: #EFE2D0;
+    --muted: #6F625A;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: radial-gradient(circle at 82% 18%, rgba(194, 138, 69, .16), transparent 30%), var(--ivory);
+    color: var(--espresso);
+    padding: 56px;
+  }
+  .board {
+    max-width: 1180px;
+    margin: 0 auto;
+    background: rgba(255, 249, 240, .82);
+    border: 1px solid rgba(23, 17, 13, .14);
+    border-radius: 34px;
+    box-shadow: 0 24px 70px rgba(23, 17, 13, .15);
+    overflow: hidden;
+  }
+  .hero {
+    padding: 48px 52px;
+    background: linear-gradient(135deg, var(--espresso), var(--oxblood));
+    color: var(--ivory-light);
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 34px;
+    align-items: end;
+  }
+  .eyebrow {
+    color: var(--brass);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(46px, 5.5vw, 76px);
+    line-height: .95;
+    letter-spacing: -.055em;
+    margin: 0;
+    max-width: 720px;
+  }
+  .hero p {
+    margin: 22px 0 0;
+    color: rgba(255,249,240,.74);
+    font-size: 18px;
+    max-width: 640px;
+    line-height: 1.65;
+  }
+  .mini-card {
+    background: rgba(255,249,240,.08);
+    border: 1px solid rgba(255,249,240,.16);
+    border-radius: 24px;
+    padding: 28px;
+  }
+  .mini-card strong { color: var(--ivory-light); display: block; font-size: 24px; font-family: "Source Serif 4", Georgia, serif; }
+  .mini-card span { color: rgba(255,249,240,.68); display: block; margin-top: 9px; line-height: 1.5; }
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+  .swatch {
+    min-height: 235px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(23,17,13,.11);
+  }
+  .swatch:last-child { border-right: none; }
+  .swatch.dark { color: var(--ivory-light); }
+  .swatch h2 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0;
+  }
+  .swatch .hex { font-weight: 800; letter-spacing: .08em; font-size: 13px; margin-top: 8px; }
+  .swatch p { margin: 20px 0 0; line-height: 1.45; font-size: 14px; max-width: 180px; }
+  .usage {
+    padding: 44px 52px 52px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .usage-card {
+    border-radius: 24px;
+    border: 1px solid rgba(23,17,13,.13);
+    background: var(--ivory-light);
+    padding: 24px;
+    box-shadow: 0 14px 34px rgba(23,17,13,.08);
+  }
+  .usage-card h3 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 25px;
+    line-height: 1;
+    letter-spacing: -.03em;
+    margin: 0 0 12px;
+  }
+  .usage-card p { color: var(--muted); margin: 0; line-height: 1.6; }
+  .button-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .btn { padding: 13px 20px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 13px; }
+  .btn.primary { background: var(--oxblood); color: var(--ivory-light); }
+  .btn.secondary { border: 1px solid rgba(74,24,24,.22); color: var(--oxblood); background: rgba(255,249,240,.5); }
+  .accent-line { height: 5px; width: 72px; background: var(--brass); border-radius: 99px; margin-top: 22px; }
+</style>
+</head>
+<body>
+  <main class="board">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Stratton Law Palette Direction</div>
+        <h1>Serious, warm, and more authoritative than brown.</h1>
+        <p>The updated scheme keeps the Miami warmth but shifts the brand into a more legal, premium register through oxblood, espresso, ivory, brass, and restrained clay taupe.</p>
+      </div>
+      <div class="mini-card">
+        <strong>Primary impression</strong>
+        <span>Confident boutique counsel with warmth, contrast, and a more serious legal presence.</span>
+      </div>
+    </section>
+
+    <section class="palette">
+      <div class="swatch dark" style="background:#4A1818"><div><h2>Deep Oxblood</h2><div class="hex">#4A1818</div></div><p>Primary brand color for buttons, hero emphasis, seals, and important calls-to-action.</p></div>
+      <div class="swatch dark" style="background:#17110D"><div><h2>Espresso Black</h2><div class="hex">#17110D</div></div><p>Used for topbar, footer, deep contrast sections, and authoritative text structure.</p></div>
+      <div class="swatch" style="background:#FAF4EA"><div><h2>Warm Ivory</h2><div class="hex">#FAF4EA</div></div><p>Main page background, replacing flat white with a softer premium legal surface.</p></div>
+      <div class="swatch" style="background:#C28A45"><div><h2>Muted Brass</h2><div class="hex">#C28A45</div></div><p>Premium accent for small details, ratings, dots, icons, and underline treatments.</p></div>
+      <div class="swatch dark" style="background:#8A5140"><div><h2>Clay Taupe</h2><div class="hex">#8A5140</div></div><p>Secondary warmth used sparingly so the site does not become brown-heavy.</p></div>
+    </section>
+
+    <section class="usage">
+      <div class="usage-card">
+        <h3>Calls to action</h3>
+        <p>Oxblood buttons feel stronger and more lawyerly than brown, while still pairing well with the sunset hero image.</p>
+        <div class="button-row"><a class="btn primary">Book a Consultation</a><a class="btn secondary">Explore Practice Areas</a></div>
+      </div>
+      <div class="usage-card">
+        <h3>Premium details</h3>
+        <p>Muted brass is used only for small highlights so the page feels elevated without becoming flashy.</p>
+        <div class="accent-line"></div>
+      </div>
+      <div class="usage-card">
+        <h3>Overall tone</h3>
+        <p>The ivory and espresso foundation keeps the design clean, mature, and high-contrast, while oxblood gives it identity.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
