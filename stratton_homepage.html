@@ -8,6 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.webgpu.js",
+    "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.webgpu.js",
+    "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.tsl.js"
+  }
+}
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -254,19 +263,45 @@
     background: var(--cream-2);
   }
 
+  /* Cream readability scrim — sits ABOVE the 3D water (-3) and static fallback (-4).
+     Opaque on the left so the headline stays legible; near-transparent on the
+     right and top so the sunset water shows; fades back into cream at the
+     bottom where the content sits. */
   .hero::before {
     content: "";
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(250, 244, 234, 0.96) 0%, rgba(250, 244, 234, 0.89) 38%, rgba(250, 244, 234, 0.50) 68%, rgba(250, 244, 234, 0.18) 100%),
-      linear-gradient(180deg, rgba(250, 244, 234, 0.25) 0%, rgba(250, 244, 234, 0.93) 100%),
-      url("assets/miami-beach-hero.jpg") center right / cover no-repeat;
+      linear-gradient(90deg, rgba(250, 244, 234, 0.95) 0%, rgba(250, 244, 234, 0.86) 34%, rgba(250, 244, 234, 0.30) 56%, rgba(250, 244, 234, 0.00) 76%),
+      linear-gradient(180deg, rgba(250, 244, 234, 0.00) 0%, rgba(250, 244, 234, 0.00) 60%, rgba(250, 244, 234, 0.40) 100%);
     z-index: -2;
-    transform: scale(1.03);
   }
 
-  .hero::after {
+  /* WebGPU/WebGL TSL water canvas */
+  #hero-water {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    z-index: -3;
+  }
+
+  /* Static fallback (original Miami hero image). Visible only when the 3D layer
+     is disabled (reduced-motion, no GPU backend) or hidden behind the opaque
+     canvas when 3D is running. */
+  .hero-fallback {
+    position: absolute;
+    inset: 0;
+    background: url("assets/miami-beach-hero.jpg") center right / cover no-repeat;
+    transform: scale(1.03);
+    z-index: -4;
+  }
+
+  /* Old flat watermark retired — the wordmark now floats on the 3D water
+     surface (see hero-water.js). Kept as a fallback only when 3D is disabled. */
+  .hero-3d-off .hero::after {
     content: "STRATTON LAW";
     position: absolute;
     right: -42px;
@@ -342,9 +377,12 @@
     min-height: 34px;
     margin-top: 21px;
     position: relative;
+    max-width: 560px;
     color: var(--burgundy);
     font-size: clamp(17px, 2vw, 23px);
     font-weight: 800;
+    /* cream halo keeps the line legible where it crosses the bright water */
+    text-shadow: 0 1px 12px rgba(250, 244, 234, 0.9), 0 0 3px rgba(250, 244, 234, 0.95);
   }
 
   .rotator span {
@@ -401,11 +439,12 @@
 
   .review-card, .support-card, .feature-card {
     position: absolute;
-    border: 1px solid rgba(74, 24, 24, 0.16);
-    background: rgba(255, 249, 240, 0.82);
-    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 249, 240, 0.37);
+    backdrop-filter: blur(15px) saturate(1.12);
+    -webkit-backdrop-filter: blur(15px) saturate(1.12);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 24px 70px rgba(23, 17, 13, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.65);
   }
 
   .review-card {
@@ -427,12 +466,14 @@
     bottom: 0;
     width: 286px;
     padding: 24px;
-    background: rgba(74, 24, 24, 0.96);
+    background: rgba(58, 18, 18, 0.44);
     color: var(--cream-2);
-    border-color: rgba(255,255,255,0.16);
+    border-color: rgba(255, 255, 255, 0.20);
+    box-shadow: 0 24px 70px rgba(23, 17, 13, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   }
 
   .card-kicker { color: var(--copper); font-size: 12px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+  .feature-card .card-kicker { color: rgba(247, 224, 205, 0.95); } /* lighter on the dark translucent card */
   .review-card blockquote { font-family: var(--font-display); font-size: 23px; line-height: 1.25; color: var(--ink); }
   .stars { margin-top: 18px; color: var(--gold); letter-spacing: 2px; font-size: 15px; }
   .review-name { margin-top: 8px; color: var(--muted); font-weight: 700; font-size: 13px; }
@@ -562,6 +603,7 @@
     .nav-cta { padding: 11px 15px; }
     .hero { padding: 58px 18px 36px; min-height: auto; }
     .hero::before { background: linear-gradient(180deg, rgba(250,244,234,0.94), rgba(250,244,234,0.82)), url("assets/miami-beach-hero.jpg") center / cover no-repeat; }
+    #hero-water { display: none; } /* mobile: skip 3D, use static image scrim above */
     .hero-card-wrap { display: none; }
     .hero-actions a { width: 100%; }
     section { padding: 76px 18px; }
@@ -609,6 +651,8 @@
 
 <main id="top">
   <section class="hero" aria-label="Hero section">
+    <div class="hero-fallback" aria-hidden="true"></div>
+    <canvas id="hero-water" aria-hidden="true"></canvas>
     <div class="hero-inner">
       <div class="hero-copy">
         <div class="eyebrow">Florida Bar #240966 · Miami Beach</div>
@@ -757,5 +801,6 @@
     <div class="footer-bar">© 2026 Law Office of Douglas D. Stratton, P.A.</div>
   </div>
 </footer>
+<script type="module" src="hero-water.js"></script>
 </body>
 </html>
