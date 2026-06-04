@@ -1,0 +1,13 @@
+# Files excluded from the public Cloudflare deploy (gitignore-style patterns).
+# Without this, `wrangler deploy` with assets dir "." serves the whole repo,
+# including the .git history — do not remove.
+.git
+.git/**
+.wrangler
+.wrangler/**
+node_modules
+node_modules/**
+wrangler.jsonc
+.assetsignore
+*.md
+stratton_palette_board.html
