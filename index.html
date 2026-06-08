@@ -231,6 +231,32 @@
 
   .nav-links a:hover::after { transform: scaleX(1); }
 
+  /* Hamburger toggle — hidden on desktop, shown <=1040px */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255, 249, 240, 0.7);
+    cursor: pointer;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--burgundy);
+    border-radius: 2px;
+    transition: transform 220ms ease, opacity 180ms ease;
+  }
+  header.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  header.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  header.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .nav-cta, .btn-primary, .btn-outline, .btn-cream, .btn-white {
     border-radius: 999px;
     text-decoration: none;
@@ -589,7 +615,29 @@
     .hero-card-wrap { min-height: 440px; }
     .support-card { left: 0; }
     .practice-grid, .contact-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      background: rgba(250, 244, 234, 0.98);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 24px 50px rgba(23, 17, 13, 0.16);
+      padding: 6px 22px 16px;
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+    header.nav-open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
+    .nav-links a { display: block; padding: 14px 4px; font-size: 15px; border-bottom: 1px solid var(--border-soft, rgba(23,17,13,0.08)); }
+    .nav-links li:last-child a { border-bottom: 0; }
+    .nav-links a::after { display: none; }
     .quick-links { grid-template-columns: 1fr; margin-top: 0; padding-top: 22px; }
     .hero-detail-grid { grid-template-columns: 1fr; }
   }
@@ -601,9 +649,12 @@
     .brand { min-width: auto; }
     .brand-text span { display: none; }
     .nav-cta { padding: 11px 15px; }
-    .hero { padding: 58px 18px 36px; min-height: auto; }
-    .hero::before { background: linear-gradient(180deg, rgba(250,244,234,0.94), rgba(250,244,234,0.82)), url("assets/miami-beach-hero.jpg") center / cover no-repeat; }
-    #hero-water { display: none; } /* mobile: skip 3D, use static image scrim above */
+    .hero { padding: 58px 18px 40px; min-height: auto; }
+    /* Mobile keeps the 3D water (tuned in hero-water.js): a vertical cream wash
+       (no image) lets it show through while keeping the stacked text readable. */
+    .hero::before { background: linear-gradient(180deg, rgba(250,244,234,0.60) 0%, rgba(250,244,234,0.72) 55%, rgba(250,244,234,0.88) 100%); }
+    .hero h1 { font-size: clamp(36px, 10vw, 52px); }
+    .rotator { min-height: 58px; max-width: 100%; font-size: 16px; }
     .hero-card-wrap { display: none; }
     .hero-actions a { width: 100%; }
     section { padding: 76px 18px; }
@@ -639,13 +690,16 @@
       <div class="brand-seal">DS</div>
       <div class="brand-text"><strong>Stratton Law</strong><span>Douglas D. Stratton, P.A.</span></div>
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links-list">
       <li><a href="#practice">Practice Areas</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#results">Client Notes</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="tel:3056727772" class="nav-cta">Schedule Now</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links-list">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 </header>
 
@@ -799,6 +853,25 @@
     <div class="footer-bar">© 2026 Law Office of Douglas D. Stratton, P.A.</div>
   </div>
 </footer>
+<script>
+  // Mobile nav: toggle the dropdown, close on link click.
+  (function () {
+    var header = document.querySelector('header');
+    var toggle = document.querySelector('.nav-toggle');
+    if (!header || !toggle) return;
+    function setOpen(open) {
+      header.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    toggle.addEventListener('click', function () {
+      setOpen(!header.classList.contains('nav-open'));
+    });
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+  })();
+</script>
 <script type="module" src="hero-water.js"></script>
 </body>
 </html>

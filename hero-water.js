@@ -48,14 +48,17 @@ async function init() {
   if (!canvas || !heroEl) return;
   if (prefersReducedMotion()) { bailToFallback(); return; }
 
+  // Phones run the scene throttled: lower pixel ratio, fewer birds, coarser mesh.
+  const isMobile = window.matchMedia('(max-width: 700px)').matches;
+
   // WebGPURenderer auto-selects WebGL2 if WebGPU is unavailable.
   const renderer = new THREE.WebGPURenderer({
     canvas,
-    antialias: true,
+    antialias: !isMobile,
     alpha: false,
     powerPreference: 'high-performance',
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.5));
   await renderer.init(); // throws if no usable backend -> caught below
 
   const scene = new THREE.Scene();
@@ -170,7 +173,8 @@ async function init() {
   }
 
   // --- Water plane ---------------------------------------------------------
-  const geo = new THREE.PlaneGeometry(900, 900, 180, 180);
+  const waterSeg = isMobile ? 110 : 180;
+  const geo = new THREE.PlaneGeometry(900, 900, waterSeg, waterSeg);
   const mat = new THREE.MeshBasicNodeMaterial();
 
   // Gentle layered swell. PlaneGeometry lies in local XY; the mesh is rotated
@@ -282,7 +286,7 @@ async function init() {
   // flap rhythm + depth, and glides (wings held) while climbing — then flaps
   // harder on the descents, banking into its turns.
   function createBirds() {
-    const COUNT = 5;
+    const COUNT = isMobile ? 3 : 5;
     const RANGE = 360; // x-wrap width
     // Gull-ish wing: a shallow swept curve rather than a flat triangle.
     const wingR = new THREE.BufferGeometry();
