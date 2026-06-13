@@ -18,20 +18,35 @@ import * as THREE from 'three';
 import {
   Fn, vec2, vec3, vec4, uniform,
   time, positionLocal, positionWorld, screenUV, uv, texture,
-  mix, smoothstep, pow, abs, sin, clamp, dot, normalize, reflect,
+  mix, smoothstep, pow, abs, sin, clamp, dot, normalize, reflect, atan2,
   cameraPosition, length, oneMinus, mx_noise_float,
 } from 'three/tsl';
 
 const canvas = document.getElementById('hero-water');
 const heroEl = document.querySelector('.hero');
 
-// --- Brand palette as RGB (0..1) ------------------------------------------
-const SKY_TOP       = vec3(0.118, 0.047, 0.051); // #1e0c0d deep burgundy night
-const SKY_HORIZON   = vec3(0.851, 0.561, 0.302); // #d98f4d warm sunset gold
-const SUN_CORE      = vec3(1.000, 0.910, 0.760); // #ffe8c2 near-white sun
-const WATER_DEEP    = vec3(0.090, 0.043, 0.047); // #170b0c
-const WATER_SHALLOW = vec3(0.541, 0.318, 0.251); // #8a5140 copper
-const GOLD          = vec3(0.761, 0.541, 0.271); // #c28a45
+// --- Palette ---------------------------------------------------------------
+// Flip PALETTE and reload to switch the hero's colour scheme:
+//   'sunset'   = warm brand (burgundy/copper/gold)
+//   'daylight' = blue ocean + white wash + blue sky (test)
+const PALETTE = 'daylight';
+const PALETTES = {
+  sunset: {
+    skyTop: [0.118, 0.047, 0.051], skyHorizon: [0.851, 0.561, 0.302], sun: [1.0, 0.910, 0.760],
+    waterDeep: [0.090, 0.043, 0.047], waterShallow: [0.541, 0.318, 0.251], accent: [0.761, 0.541, 0.271],
+  },
+  daylight: {
+    skyTop: [0.16, 0.42, 0.74], skyHorizon: [0.74, 0.87, 0.96], sun: [1.0, 0.99, 0.93],
+    waterDeep: [0.03, 0.15, 0.30], waterShallow: [0.14, 0.48, 0.64], accent: [0.90, 0.96, 1.0],
+  },
+};
+const _pal = PALETTES[PALETTE] || PALETTES.sunset;
+const SKY_TOP       = vec3(..._pal.skyTop);
+const SKY_HORIZON   = vec3(..._pal.skyHorizon);
+const SUN_CORE      = vec3(..._pal.sun);
+const WATER_DEEP    = vec3(..._pal.waterDeep);
+const WATER_SHALLOW = vec3(..._pal.waterShallow);
+const GOLD          = vec3(..._pal.accent); // "accent": foam / glitter / white-wash
 
 function prefersReducedMotion() {
   return window.matchMedia &&
@@ -77,6 +92,10 @@ async function init() {
     const d = length(screenUV.sub(vec2(0.5, 0.47)));
     const glow = smoothstep(0.20, 0.0, d);
     col = mix(col, SUN_CORE, glow.mul(0.5));
+    // Soft radial sun rays fanning out from the sun (subtle).
+    const sv = screenUV.sub(vec2(0.5, 0.47));
+    const rays = sin(atan2(sv.y, sv.x).mul(24.0)).mul(0.5).add(0.5);
+    col = col.add(SUN_CORE.mul(rays.mul(smoothstep(0.5, 0.04, length(sv))).mul(0.05)));
     return vec4(col, 1.0);
   })();
 
@@ -222,6 +241,11 @@ async function init() {
     const lane = abs(positionWorld.x.div(positionWorld.z.abs().add(24.0)));
     const column = smoothstep(0.22, 0.0, lane).mul(depth);
     col = col.add(GOLD.mul(column.mul(0.5)));
+
+    // White-wash: foam on the steepest wave crests, mostly toward the horizon.
+    const steep = clamp(abs(bumpX).add(abs(bumpZ)).mul(0.4), 0.0, 1.0);
+    const caps = smoothstep(0.72, 1.0, steep).mul(depth);
+    col = col.add(SUN_CORE.mul(caps.mul(0.5)));
 
     // Concentrate the sunset glare centre-right; calm + darken the left side.
     col = col.mul(smoothstep(-110.0, 90.0, positionWorld.x).mul(0.48).add(0.52));

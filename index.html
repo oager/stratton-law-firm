@@ -298,8 +298,8 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(250, 244, 234, 0.95) 0%, rgba(250, 244, 234, 0.86) 34%, rgba(250, 244, 234, 0.30) 56%, rgba(250, 244, 234, 0.00) 76%),
-      linear-gradient(180deg, rgba(250, 244, 234, 0.00) 0%, rgba(250, 244, 234, 0.00) 60%, rgba(250, 244, 234, 0.40) 100%);
+      linear-gradient(90deg, rgba(234, 243, 250, 0.95) 0%, rgba(234, 243, 250, 0.86) 34%, rgba(234, 243, 250, 0.30) 56%, rgba(234, 243, 250, 0.00) 76%),
+      linear-gradient(180deg, rgba(234, 243, 250, 0.00) 0%, rgba(234, 243, 250, 0.00) 60%, rgba(234, 243, 250, 0.40) 100%);
     z-index: -2;
   }
 
@@ -320,7 +320,7 @@
   .hero-fallback {
     position: absolute;
     inset: 0;
-    background: url("assets/miami-beach-hero.jpg") center right / cover no-repeat;
+    background: url("assets/hero-daylight.jpg") center / cover no-repeat;
     transform: scale(1.03);
     z-index: -4;
   }
@@ -652,7 +652,7 @@
     .hero { padding: 58px 18px 40px; min-height: auto; }
     /* Mobile keeps the 3D water (tuned in hero-water.js): a vertical cream wash
        (no image) lets it show through while keeping the stacked text readable. */
-    .hero::before { background: linear-gradient(180deg, rgba(250,244,234,0.60) 0%, rgba(250,244,234,0.72) 55%, rgba(250,244,234,0.88) 100%); }
+    .hero::before { background: linear-gradient(180deg, rgba(234,243,250,0.55) 0%, rgba(234,243,250,0.70) 55%, rgba(234,243,250,0.88) 100%); }
     .hero h1 { font-size: clamp(36px, 10vw, 52px); }
     .rotator { min-height: 58px; max-width: 100%; font-size: 16px; }
     .hero-card-wrap { display: none; }
